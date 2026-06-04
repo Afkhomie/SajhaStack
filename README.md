@@ -221,6 +221,7 @@ sajhastack/
 | `pnpm lint` | Run ESLint |
 
 ## Contributing
+pnpm dev
 
 1. Fork the repo
 2. Create a feature branch: `git checkout -b feature/your-feature`

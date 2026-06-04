@@ -5,9 +5,9 @@ export const siteConfig = {
   tagline: "Where Nepal's Developers Connect, Build, and Grow",
   url: "https://sajhastack.com",
   socials: {
-    instagram: "https://instagram.com/sajhastack",
+    instagram: "https://www.instagram.com/sajha_stack_",
     github: "https://github.com/sajhastack",
-    linkedin: "https://linkedin.com/company/sajhastack",
+    linkedin: "https://www.linkedin.com/in/sajha-stack-541215401/",
     discord: "#",
   },
 };
@@ -20,10 +20,10 @@ export const navLinks = [
 ];
 
 export const stats = [
-  { label: "Members", value: "500+" },
-  { label: "Events Hosted", value: "25+" },
-  { label: "Cities Reached", value: "12" },
-  { label: "Projects Built", value: "40+" },
+  { label: "Members", value: "100+", icon: "Users" },
+  { label: "Crazy Events", value: "Coming Soon", icon: "Sparkles" },
+  { label: "Cities Going to Reach", value: "2–3", icon: "MapPin" },
+  { label: "Projects Built", value: "10+", icon: "Rocket" },
 ];
 
 export type EventStatus = "upcoming" | "ongoing" | "past";
@@ -39,68 +39,8 @@ export interface CommunityEvent {
   category: EventCategory;
 }
 
-export const events: CommunityEvent[] = [
-  {
-    id: "1",
-    title: "SajhaHack 2026",
-    description:
-      "48-hour hackathon bringing together 200+ developers to build solutions for Nepal's challenges.",
-    date: "2026-07-15",
-    location: "Kathmandu, Nepal",
-    status: "upcoming",
-    category: "hackathon",
-  },
-  {
-    id: "2",
-    title: "DevMeet Pokhara",
-    description:
-      "Monthly developer meetup featuring talks on web3, AI, and open source contributions.",
-    date: "2026-06-20",
-    location: "Pokhara, Nepal",
-    status: "upcoming",
-    category: "meetup",
-  },
-  {
-    id: "3",
-    title: "React Nepal Workshop",
-    description:
-      "Hands-on workshop covering React Server Components, Next.js App Router, and modern patterns.",
-    date: "2026-06-10",
-    location: "Lalitpur, Nepal",
-    status: "upcoming",
-    category: "workshop",
-  },
-  {
-    id: "4",
-    title: "Open Source Saturday",
-    description:
-      "Collaborative coding session where we contribute to open source projects together.",
-    date: "2026-05-25",
-    location: "Kathmandu, Nepal",
-    status: "past",
-    category: "meetup",
-  },
-  {
-    id: "5",
-    title: "SajhaHack 2025",
-    description:
-      "Our inaugural hackathon — 120 developers, 30 teams, 48 hours of building.",
-    date: "2025-12-10",
-    location: "Kathmandu, Nepal",
-    status: "past",
-    category: "hackathon",
-  },
-  {
-    id: "6",
-    title: "TypeScript Deep Dive",
-    description:
-      "Advanced TypeScript patterns for production applications — generics, inference, and type-level programming.",
-    date: "2025-11-15",
-    location: "Online",
-    status: "past",
-    category: "workshop",
-  },
-];
+// No events published yet — crazy ones dropping soon.
+export const events: CommunityEvent[] = [];
 
 export interface TeamMember {
   name: string;
@@ -115,27 +55,40 @@ export const team: TeamMember[] = [
     name: "Aditya Bhujel",
     role: "Frontend Lead",
     avatar: "/images/team/placeholder.svg",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    github: "https://github.com/Shadow-ops-alt",
+    linkedin: "https://www.linkedin.com/in/aditya-bhujel-8755942b2/",
   },
   {
-    name: "Sajha Dev",
-    role: "Community Manager",
+    name: "Ansh Bohara",
+    role: "Frontend, Backend & Cybersecurity Lead",
     avatar: "/images/team/placeholder.svg",
-    github: "https://github.com",
+    github: "https://github.com/GOJO-SENPA1",
+    linkedin: "https://www.linkedin.com/in/ansh-bohara-47169a344",
   },
   {
-    name: "Priya Sharma",
-    role: "Backend Engineer",
+    name: "Aayush Dev",
+    role: "Cybersecurity Lead",
     avatar: "/images/team/placeholder.svg",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
   },
   {
-    name: "Rajan KC",
-    role: "DevOps & Cloud",
+    name: "Aaditya Karna",
+    role: "Marketing Lead",
     avatar: "/images/team/placeholder.svg",
-    github: "https://github.com",
+  },
+  {
+    name: "Nischal Regmi",
+    role: "Core Team",
+    avatar: "/images/team/placeholder.svg",
+  },
+  {
+    name: "Tejah Mehta",
+    role: "Core Team",
+    avatar: "/images/team/placeholder.svg",
+  },
+  {
+    name: "Prashnna Luitel",
+    role: "Core Team",
+    avatar: "/images/team/placeholder.svg",
   },
 ];
 

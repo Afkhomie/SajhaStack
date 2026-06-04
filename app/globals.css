@@ -5,20 +5,24 @@
   --font-display: 'Instrument Serif', serif;
   --font-body: 'Inter', sans-serif;
 
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(220 15% 13%);
-  --color-primary: hsl(0 72% 51%);
+  --color-background: hsl(220 18% 7%);
+  --color-foreground: hsl(220 14% 92%);
+  --color-primary: hsl(0 80% 63%);
   --color-primary-foreground: hsl(0 0% 100%);
-  --color-secondary: hsl(220 14% 96%);
-  --color-secondary-foreground: hsl(220 15% 13%);
-  --color-muted: hsl(220 14% 96%);
-  --color-muted-foreground: hsl(220 9% 46%);
-  --color-accent: hsl(0 72% 51%);
+  --color-secondary: hsl(220 14% 14%);
+  --color-secondary-foreground: hsl(220 14% 92%);
+  --color-muted: hsl(220 14% 14%);
+  --color-muted-foreground: hsl(220 10% 60%);
+  --color-accent: hsl(0 80% 63%);
   --color-accent-foreground: hsl(0 0% 100%);
-  --color-border: hsl(220 13% 91%);
-  --color-ring: hsl(0 72% 51%);
+  --color-border: hsl(220 13% 20%);
+  --color-ring: hsl(0 80% 63%);
 
   --radius: 0.625rem;
+
+  /* Shared motion curves — keeps every transition feeling like one system */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 * {
@@ -29,6 +33,111 @@ body {
   font-family: var(--font-body);
   color: var(--color-foreground);
   background: var(--color-background);
+  color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Reusable atmosphere utilities ---- */
+
+/* Faint blueprint grid — slowly drifts so panels feel alive, not static */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, hsl(220 14% 92% / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(220 14% 92% / 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: grid-pan 18s linear infinite;
+}
+@keyframes grid-pan {
+  to {
+    background-position: 28px 28px;
+  }
+}
+
+/* Animated gradient "stroke" — a glowing outline that rotates + breathes */
+.stroke-glow {
+  position: relative;
+  isolation: isolate;
+}
+.stroke-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--stroke-angle, 0deg),
+    hsl(0 80% 63% / 0.85),
+    hsl(24 90% 60% / 0.55),
+    hsl(0 80% 63% / 0.1) 45%,
+    hsl(0 80% 63% / 0.1) 70%,
+    hsl(0 80% 63% / 0.85)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  animation: stroke-spin 6s linear infinite;
+  transition: filter 0.4s var(--ease-out-soft);
+}
+/* Brighten + intensify the outline when the panel is hovered */
+.stroke-glow:hover::before {
+  filter: brightness(1.5) drop-shadow(0 0 8px hsl(0 80% 63% / 0.5));
+}
+
+/* Animate a custom angle so the conic stroke sweeps around the border.
+   Registered via @property so the angle can be transitioned/animated. */
+@property --stroke-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes stroke-spin {
+  to {
+    --stroke-angle: 360deg;
+  }
+}
+
+/* Soft red bloom behind hero/panels */
+.glow-radial {
+  background:
+    radial-gradient(ellipse at 70% 20%, hsl(0 80% 63% / 0.14), transparent 55%),
+    radial-gradient(ellipse at 20% 90%, hsl(24 90% 60% / 0.10), transparent 50%);
+}
+
+/* Animated link underline used in the navbar */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1.5px;
+  width: 100%;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.32s var(--ease-out-soft);
+}
+.link-underline:hover::after,
+.link-underline[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Honor user motion preferences across the whole app */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -9,6 +9,10 @@ services:
       - .env
     environment:
       - NODE_ENV=production
+      - DATABASE_URL=postgres://sajha:sajha@db:5432/sajhastack
+    depends_on:
+      db:
+        condition: service_healthy
     restart: unless-stopped
 
   # Development mode (with hot reload)
@@ -25,5 +29,30 @@ services:
       - .env
     environment:
       - NODE_ENV=development
+      - DATABASE_URL=postgres://sajha:sajha@db:5432/sajhastack
+    depends_on:
+      db:
+        condition: service_healthy
     profiles:
       - dev
+
+  # Postgres — stores /join registrations
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=sajha
+      - POSTGRES_PASSWORD=sajha
+      - POSTGRES_DB=sajhastack
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sajha -d sajhastack"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  pgdata:

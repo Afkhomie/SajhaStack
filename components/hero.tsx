@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/constants";
 const fadeUp = (delay: number = 0) => ({
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+  transition: { duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] as const },
 });
 
 export function Hero() {
@@ -29,7 +29,7 @@ export function Hero() {
           />
         </video>
         {/* Overlay for text readability */}
-        <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px]" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center px-6 text-center">

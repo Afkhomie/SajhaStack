@@ -25,7 +25,7 @@ export default function AboutPage() {
           <h1 className="font-[family-name:var(--font-display)] text-4xl md:text-5xl tracking-tight text-foreground">
             About SajhaStack
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
+          <p className="mt-4 inline-block rounded-2xl border border-border/50 bg-background/55 px-5 py-4 text-lg text-foreground/90 font-medium leading-relaxed backdrop-blur-md">
             We&apos;re a community of developers across Nepal united by a shared
             belief: that we grow faster together. Through events, open source,
             and knowledge sharing, we&apos;re building the future of Nepal&apos;s
@@ -44,7 +44,7 @@ export default function AboutPage() {
           <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-tight text-foreground">
             Our Story
           </h2>
-          <div className="mt-4 text-muted-foreground leading-relaxed space-y-4 max-w-2xl">
+          <div className="mt-4 rounded-2xl border border-border/50 bg-background/55 p-6 text-foreground/80 leading-relaxed space-y-4 max-w-2xl backdrop-blur-md">
             <p>
               SajhaStack started from a simple Instagram group chat — a handful
               of developers in Nepal who wanted a space to share ideas, ask
@@ -85,20 +85,21 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="rounded-xl border border-border p-6"
+                  transition={{ duration: 0.4, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: -4 }}
+                  className="group rounded-xl border border-border bg-background/60 backdrop-blur-md p-6 transition-all duration-300 ease-[var(--ease-out-soft)] hover:border-primary/30 hover:shadow-[0_8px_30px_-12px_hsl(0_80%_63%/0.4)]"
                 >
                   <div className="flex items-center gap-3 mb-3">
                     {Icon && (
-                      <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-primary/10">
-                        <Icon className="h-4.5 w-4.5 text-primary" />
+                      <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+                        <Icon className="h-4.5 w-4.5 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
                       </div>
                     )}
-                    <h3 className="font-semibold text-foreground">
+                    <h3 className="font-semibold text-foreground transition-colors group-hover:text-primary">
                       {value.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-foreground/70">
                     {value.description}
                   </p>
                 </motion.div>
@@ -118,7 +119,7 @@ export default function AboutPage() {
           <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-tight text-foreground">
             The Team
           </h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 text-foreground/70 font-medium">
             The people keeping the community running.
           </p>
 
@@ -129,10 +130,11 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="rounded-xl border border-border p-6 text-center"
+                transition={{ duration: 0.4, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4 }}
+                className="group rounded-xl border border-border bg-background/60 backdrop-blur-md p-6 text-center transition-all duration-300 ease-[var(--ease-out-soft)] hover:border-primary/30 hover:shadow-[0_8px_30px_-12px_hsl(0_80%_63%/0.4)]"
               >
-                <div className="mx-auto h-16 w-16 rounded-full bg-secondary flex items-center justify-center text-xl font-semibold text-muted-foreground">
+                <div className="mx-auto h-16 w-16 rounded-full bg-secondary flex items-center justify-center text-xl font-semibold text-muted-foreground transition-all duration-300 group-hover:bg-primary/10 group-hover:text-primary group-hover:scale-105">
                   {member.name
                     .split(" ")
                     .map((n) => n[0])
@@ -148,7 +150,7 @@ export default function AboutPage() {
                       href={member.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-muted-foreground transition-all duration-200 hover:text-primary hover:scale-125"
                     >
                       <Github className="h-4 w-4" />
                     </a>
@@ -158,7 +160,7 @@ export default function AboutPage() {
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-muted-foreground transition-all duration-200 hover:text-primary hover:scale-125"
                     >
                       <Linkedin className="h-4 w-4" />
                     </a>

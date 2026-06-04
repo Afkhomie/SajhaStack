@@ -4,9 +4,12 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const PARTICLE_COUNT = 150;
+const PARTICLE_COUNT = 90;
 const CONNECTION_DISTANCE = 3;
 const BOUNDS = 10;
+// Cap drawn connections — a full N² buffer (135k floats) is wasteful since
+// only a fraction of pairs are ever within CONNECTION_DISTANCE.
+const MAX_LINES = PARTICLE_COUNT * 14;
 
 function Particles() {
   const pointsRef = useRef<THREE.Points>(null);
@@ -34,15 +37,9 @@ function Particles() {
     return vel;
   }, []);
 
-  const linePositions = useMemo(
-    () => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 6),
-    []
-  );
+  const linePositions = useMemo(() => new Float32Array(MAX_LINES * 6), []);
 
-  const lineColors = useMemo(
-    () => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 6),
-    []
-  );
+  const lineColors = useMemo(() => new Float32Array(MAX_LINES * 6), []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -75,8 +72,8 @@ function Particles() {
     pointsRef.current.geometry.attributes.position.needsUpdate = true;
 
     let lineIndex = 0;
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      for (let j = i + 1; j < PARTICLE_COUNT; j++) {
+    for (let i = 0; i < PARTICLE_COUNT && lineIndex < MAX_LINES; i++) {
+      for (let j = i + 1; j < PARTICLE_COUNT && lineIndex < MAX_LINES; j++) {
         const dx = posArray[i * 3] - posArray[j * 3];
         const dy = posArray[i * 3 + 1] - posArray[j * 3 + 1];
         const dz = posArray[i * 3 + 2] - posArray[j * 3 + 2];
@@ -125,6 +122,7 @@ function Particles() {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
+            args={[positions, 3]}
             count={PARTICLE_COUNT}
             array={positions}
             itemSize={3}
@@ -132,7 +130,7 @@ function Particles() {
         </bufferGeometry>
         <pointsMaterial
           size={0.08}
-          color="#1a1a2e"
+          color="#c7cdd6"
           transparent
           opacity={0.8}
           sizeAttenuation
@@ -143,13 +141,15 @@ function Particles() {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={PARTICLE_COUNT * PARTICLE_COUNT * 2}
+            args={[linePositions, 3]}
+            count={MAX_LINES * 2}
             array={linePositions}
             itemSize={3}
           />
           <bufferAttribute
             attach="attributes-color"
-            count={PARTICLE_COUNT * PARTICLE_COUNT * 2}
+            args={[lineColors, 3]}
+            count={MAX_LINES * 2}
             array={lineColors}
             itemSize={3}
           />
@@ -171,9 +171,15 @@ function Scene() {
 
 export function ParticleNetwork() {
   const [mounted, setMounted] = useState(false);
+  const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   if (!mounted) return null;
@@ -181,19 +187,21 @@ export function ParticleNetwork() {
   return (
     <div className="absolute inset-0 z-0">
       {/* Gradient backdrop */}
-      <div className="absolute inset-0 bg-gradient-to-br from-rose-50/80 via-white to-orange-50/60" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(220_18%_9%)] via-[hsl(220_18%_7%)] to-[hsl(220_18%_6%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(220,38,38,0.06)_0%,_transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(251,146,60,0.05)_0%,_transparent_50%)]" />
 
-      {/* Three.js canvas */}
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: "transparent" }}
-      >
-        <Scene />
-      </Canvas>
+      {/* Three.js canvas — skipped when the user prefers reduced motion */}
+      {!reduced && (
+        <Canvas
+          camera={{ position: [0, 0, 8], fov: 60 }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+          style={{ background: "transparent" }}
+        >
+          <Scene />
+        </Canvas>
+      )}
     </div>
   );
 }
