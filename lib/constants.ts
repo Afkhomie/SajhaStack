@@ -95,22 +95,26 @@ export const team: TeamMember[] = [
 export const values = [
   {
     title: "Open Source",
-    description: "We believe in building in the open and contributing back to the ecosystem.",
+    description:
+      "We believe in building in the open and contributing back to the ecosystem.",
     icon: "Code2",
   },
   {
     title: "Inclusivity",
-    description: "Every developer in Nepal deserves a seat at the table, regardless of background.",
+    description:
+      "Every developer in Nepal deserves a seat at the table, regardless of background.",
     icon: "Users",
   },
   {
     title: "Knowledge Sharing",
-    description: "We grow together by teaching what we know and learning from each other.",
+    description:
+      "We grow together by teaching what we know and learning from each other.",
     icon: "BookOpen",
   },
   {
     title: "Nepal First",
-    description: "Building technology solutions that address local challenges and opportunities.",
+    description:
+      "Building technology solutions that address local challenges and opportunities.",
     icon: "Mountain",
   },
 ];

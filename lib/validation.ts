@@ -18,7 +18,10 @@ const INTERESTS = new Set([
 export function clean(value: unknown, maxLen = 200): string {
   if (typeof value !== "string") return "";
   // eslint-disable-next-line no-control-regex
-  return value.replace(/[\x00-\x1F\x7F]/g, "").trim().slice(0, maxLen);
+  return value
+    .replace(/[\x00-\x1F\x7F]/g, "")
+    .trim()
+    .slice(0, maxLen);
 }
 
 export function validName(value: unknown): string | null {
