@@ -23,7 +23,11 @@ export function StatsStrip() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.4,
+                delay: i * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               whileHover={{ y: -4 }}
               className="group rounded-xl border border-border bg-background/60 backdrop-blur-md p-6 text-center transition-all duration-300 ease-[var(--ease-out-soft)] hover:border-primary/30 hover:shadow-[0_8px_30px_-12px_hsl(0_80%_63%/0.4)]"
             >

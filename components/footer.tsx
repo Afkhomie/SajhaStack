@@ -8,7 +8,10 @@ export function Footer() {
       <div className="px-6 md:px-12 lg:px-20 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <Link href="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-lg font-semibold tracking-tight"
+            >
               <span className="text-primary">&#10022;</span>
               <span>{siteConfig.name}</span>
             </Link>
@@ -72,7 +75,8 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t border-border text-center">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights
+            reserved.
           </p>
         </div>
       </div>

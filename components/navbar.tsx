@@ -51,7 +51,9 @@ export function Navbar() {
                 <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center">
                   <User className="h-3.5 w-3.5 text-primary" />
                 </div>
-                <span className="font-medium">{session.user?.name || session.user?.email}</span>
+                <span className="font-medium">
+                  {session.user?.name || session.user?.email}
+                </span>
               </div>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
@@ -76,14 +78,18 @@ export function Navbar() {
           className="md:hidden p-2 text-foreground"
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
         </button>
       </nav>
 
       <div
         className={cn(
           "md:hidden overflow-hidden transition-all duration-300 ease-out",
-          mobileOpen ? "max-h-80" : "max-h-0"
+          mobileOpen ? "max-h-80" : "max-h-0",
         )}
       >
         <div className="flex flex-col gap-4 px-6 pb-6">

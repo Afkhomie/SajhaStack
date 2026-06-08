@@ -196,7 +196,11 @@ export function ParticleNetwork() {
         <Canvas
           camera={{ position: [0, 0, 8], fov: 60 }}
           dpr={[1, 1.5]}
-          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+          }}
           style={{ background: "transparent" }}
         >
           <Scene />
