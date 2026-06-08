@@ -30,7 +30,7 @@ export function ensureSchema(): Promise<void> {
            github     TEXT,
            interest   TEXT,
            created_at TIMESTAMPTZ NOT NULL DEFAULT now()
-         )`
+         )`,
       );
       // Accounts for credential sign-in. Passwords are stored ONLY as bcrypt
       // hashes — never plaintext.
@@ -41,7 +41,7 @@ export function ensureSchema(): Promise<void> {
            email         TEXT NOT NULL UNIQUE,
            password_hash TEXT NOT NULL,
            created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
-         )`
+         )`,
       );
     })().catch((err) => {
       schemaReady = null; // allow retry on next request

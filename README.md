@@ -258,7 +258,3 @@ The app is ready to deploy on:
 - **Vercel** (recommended): Connect your GitHub repo, it auto-deploys
 - **Docker**: Use the production `Dockerfile` on any container host (Railway, Fly.io, AWS ECS)
 - **Node.js**: `pnpm build && pnpm start` on any server with Node.js 20+
-
-## License
-
-MIT

@@ -22,11 +22,7 @@ export function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className={cn(
-        "mb-12",
-        align === "center" && "text-center",
-        className
-      )}
+      className={cn("mb-12", align === "center" && "text-center", className)}
     >
       <h2 className="font-[family-name:var(--font-display)] text-3xl md:text-4xl tracking-tight text-foreground">
         {title}

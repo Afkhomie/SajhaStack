@@ -30,16 +30,86 @@ type Shape = {
 
 // Hand-placed so shapes spread across depth without clustering on the text.
 const SHAPES: Shape[] = [
-  { geom: "ico", position: [-4.2, 2.4, -2], scale: 1.1, color: RED, speed: 1.4, rotSpeed: 0.18 },
-  { geom: "torus", position: [4.4, 1.2, -4], scale: 1.0, color: STEEL, speed: 1.1, rotSpeed: 0.24 },
-  { geom: "knot", position: [3.6, -2.6, -1], scale: 0.7, color: ORANGE, speed: 1.6, rotSpeed: 0.3 },
-  { geom: "octa", position: [-3.8, -2.2, -3], scale: 1.0, color: LIGHT, speed: 1.2, rotSpeed: 0.2 },
-  { geom: "dodeca", position: [0.4, 3.4, -6], scale: 1.4, color: STEEL, speed: 0.9, rotSpeed: 0.15 },
-  { geom: "box", position: [-5.2, -0.4, -7], scale: 1.2, color: RED, speed: 1.0, rotSpeed: 0.22 },
-  { geom: "ico", position: [5.4, 3.0, -9], scale: 1.6, color: ORANGE, speed: 0.8, rotSpeed: 0.16 },
-  { geom: "torus", position: [-1.6, -3.6, -10], scale: 1.3, color: RED, speed: 0.85, rotSpeed: 0.2 },
-  { geom: "octa", position: [2.2, 0.6, -13], scale: 1.8, color: STEEL, speed: 0.7, rotSpeed: 0.14 },
-  { geom: "knot", position: [-3.0, 1.8, -16], scale: 1.0, color: LIGHT, speed: 0.6, rotSpeed: 0.12 },
+  {
+    geom: "ico",
+    position: [-4.2, 2.4, -2],
+    scale: 1.1,
+    color: RED,
+    speed: 1.4,
+    rotSpeed: 0.18,
+  },
+  {
+    geom: "torus",
+    position: [4.4, 1.2, -4],
+    scale: 1.0,
+    color: STEEL,
+    speed: 1.1,
+    rotSpeed: 0.24,
+  },
+  {
+    geom: "knot",
+    position: [3.6, -2.6, -1],
+    scale: 0.7,
+    color: ORANGE,
+    speed: 1.6,
+    rotSpeed: 0.3,
+  },
+  {
+    geom: "octa",
+    position: [-3.8, -2.2, -3],
+    scale: 1.0,
+    color: LIGHT,
+    speed: 1.2,
+    rotSpeed: 0.2,
+  },
+  {
+    geom: "dodeca",
+    position: [0.4, 3.4, -6],
+    scale: 1.4,
+    color: STEEL,
+    speed: 0.9,
+    rotSpeed: 0.15,
+  },
+  {
+    geom: "box",
+    position: [-5.2, -0.4, -7],
+    scale: 1.2,
+    color: RED,
+    speed: 1.0,
+    rotSpeed: 0.22,
+  },
+  {
+    geom: "ico",
+    position: [5.4, 3.0, -9],
+    scale: 1.6,
+    color: ORANGE,
+    speed: 0.8,
+    rotSpeed: 0.16,
+  },
+  {
+    geom: "torus",
+    position: [-1.6, -3.6, -10],
+    scale: 1.3,
+    color: RED,
+    speed: 0.85,
+    rotSpeed: 0.2,
+  },
+  {
+    geom: "octa",
+    position: [2.2, 0.6, -13],
+    scale: 1.8,
+    color: STEEL,
+    speed: 0.7,
+    rotSpeed: 0.14,
+  },
+  {
+    geom: "knot",
+    position: [-3.0, 1.8, -16],
+    scale: 1.0,
+    color: LIGHT,
+    speed: 0.6,
+    rotSpeed: 0.12,
+  },
 ];
 
 function Geometry({ geom }: { geom: Shape["geom"] }) {
@@ -131,7 +201,9 @@ export function ScrollScene() {
   useEffect(() => {
     setMounted(true);
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const small = window.matchMedia("(max-width: 640px)").matches;
     // Skip the live scene on reduced-motion or tiny screens (perf + comfort).
     if (reduce || small) {
@@ -140,8 +212,7 @@ export function ScrollScene() {
     }
 
     const onScroll = () => {
-      const max =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
       scroll.current = max > 0 ? Math.min(1, window.scrollY / max) : 0;
     };
     onScroll();
@@ -160,7 +231,11 @@ export function ScrollScene() {
       <Canvas
         camera={{ position: [0, 0, 9], fov: 55 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        }}
         style={{ background: "transparent" }}
       >
         {/* Depth haze that fades distant shapes into the dark background */}

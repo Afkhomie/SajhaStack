@@ -1,15 +1,23 @@
 import { NextResponse } from "next/server";
 import { db, ensureSchema } from "@/lib/db";
-import { validName, validEmail, validGithub, validInterest } from "@/lib/validation";
+import {
+  validName,
+  validEmail,
+  validGithub,
+  validInterest,
+} from "@/lib/validation";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
   // Throttle: 5 registrations / 10 min / IP.
-  const rl = rateLimit(`join:${clientIp(req)}`, { limit: 5, windowMs: 600_000 });
+  const rl = rateLimit(`join:${clientIp(req)}`, {
+    limit: 5,
+    windowMs: 600_000,
+  });
   if (!rl.ok) {
     return NextResponse.json(
       { error: "Too many attempts. Please try again later." },
-      { status: 429, headers: { "Retry-After": String(rl.retryAfter) } }
+      { status: 429, headers: { "Retry-After": String(rl.retryAfter) } },
     );
   }
 
@@ -20,18 +28,24 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const { name, email, github, interest } = (body ?? {}) as Record<string, unknown>;
+  const { name, email, github, interest } = (body ?? {}) as Record<
+    string,
+    unknown
+  >;
 
   const cleanName = validName(name);
   if (!cleanName) {
-    return NextResponse.json({ error: "Please enter your full name." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Please enter your full name." },
+      { status: 400 },
+    );
   }
 
   const cleanEmail = validEmail(email);
   if (!cleanEmail) {
     return NextResponse.json(
       { error: "Please enter a valid email address." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -39,7 +53,7 @@ export async function POST(req: Request) {
   if (cleanGithub === null) {
     return NextResponse.json(
       { error: "That GitHub username doesn't look right." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -50,7 +64,7 @@ export async function POST(req: Request) {
     await db.query(
       `INSERT INTO registrations (name, email, github, interest)
        VALUES ($1, $2, $3, $4)`,
-      [cleanName, cleanEmail, cleanGithub ?? null, cleanInterest ?? null]
+      [cleanName, cleanEmail, cleanGithub ?? null, cleanInterest ?? null],
     );
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (err: unknown) {
@@ -62,7 +76,7 @@ export async function POST(req: Request) {
     console.error("join registration failed:", err);
     return NextResponse.json(
       { error: "Something went wrong on our side. Please try again." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
