@@ -239,7 +239,11 @@ export default function JoinPage() {
                     >
                       What interests you?
                     </label>
-                    <select id="interest" name="interest" className={inputClass}>
+                    <select
+                      id="interest"
+                      name="interest"
+                      className={inputClass}
+                    >
                       <option value="">Select an area</option>
                       <option value="web">Web Development</option>
                       <option value="mobile">Mobile Development</option>

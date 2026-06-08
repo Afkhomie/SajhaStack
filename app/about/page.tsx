@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Users, BookOpen, Mountain, Github, Linkedin } from "lucide-react";
+import {
+  Code2,
+  Users,
+  BookOpen,
+  Mountain,
+  Github,
+  Linkedin,
+} from "lucide-react";
 import { team, values } from "@/lib/constants";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -28,8 +35,8 @@ export default function AboutPage() {
           <p className="mt-4 inline-block rounded-2xl border border-border/50 bg-background/55 px-5 py-4 text-lg text-foreground/90 font-medium leading-relaxed backdrop-blur-md">
             We&apos;re a community of developers across Nepal united by a shared
             belief: that we grow faster together. Through events, open source,
-            and knowledge sharing, we&apos;re building the future of Nepal&apos;s
-            tech ecosystem.
+            and knowledge sharing, we&apos;re building the future of
+            Nepal&apos;s tech ecosystem.
           </p>
         </motion.div>
 
@@ -48,14 +55,14 @@ export default function AboutPage() {
             <p>
               SajhaStack started from a simple Instagram group chat — a handful
               of developers in Nepal who wanted a space to share ideas, ask
-              questions, and collaborate. What began as casual conversations grew
-              into something bigger.
+              questions, and collaborate. What began as casual conversations
+              grew into something bigger.
             </p>
             <p>
-              We organized our first meetup, then our first hackathon. Developers
-              from Kathmandu, Pokhara, Biratnagar, and beyond showed up. The
-              energy was undeniable. Nepal has incredible talent — it just needed
-              a platform to come together.
+              We organized our first meetup, then our first hackathon.
+              Developers from Kathmandu, Pokhara, Biratnagar, and beyond showed
+              up. The energy was undeniable. Nepal has incredible talent — it
+              just needed a platform to come together.
             </p>
             <p>
               Today, SajhaStack is a growing community hosting regular events,
@@ -85,7 +92,11 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{
+                    duration: 0.4,
+                    delay: i * 0.1,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   whileHover={{ y: -4 }}
                   className="group rounded-xl border border-border bg-background/60 backdrop-blur-md p-6 transition-all duration-300 ease-[var(--ease-out-soft)] hover:border-primary/30 hover:shadow-[0_8px_30px_-12px_hsl(0_80%_63%/0.4)]"
                 >
@@ -130,7 +141,11 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                transition={{
+                  duration: 0.4,
+                  delay: i * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
                 whileHover={{ y: -4 }}
                 className="group rounded-xl border border-border bg-background/60 backdrop-blur-md p-6 text-center transition-all duration-300 ease-[var(--ease-out-soft)] hover:border-primary/30 hover:shadow-[0_8px_30px_-12px_hsl(0_80%_63%/0.4)]"
               >

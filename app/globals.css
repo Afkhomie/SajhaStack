@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Instrument Serif', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: "Instrument Serif", serif;
+  --font-body: "Inter", sans-serif;
 
   --color-background: hsl(220 18% 7%);
   --color-foreground: hsl(220 14% 92%);
@@ -105,7 +105,7 @@ body {
 .glow-radial {
   background:
     radial-gradient(ellipse at 70% 20%, hsl(0 80% 63% / 0.14), transparent 55%),
-    radial-gradient(ellipse at 20% 90%, hsl(24 90% 60% / 0.10), transparent 50%);
+    radial-gradient(ellipse at 20% 90%, hsl(24 90% 60% / 0.1), transparent 50%);
 }
 
 /* Animated link underline used in the navbar */
